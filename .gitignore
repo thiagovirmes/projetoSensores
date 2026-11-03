@@ -1,0 +1,8 @@
+.venv/
+.local/
+dados/
+logs/
+__pycache__/
+*.pyc
+.env
+entrega.zip

@@ -1,0 +1,10 @@
+﻿test_cidades_homonimas_sao_separadas_por_uf (__main__.Integracao.test_cidades_homonimas_sao_separadas_por_uf) ... ok
+test_geracao_idempotente_e_estatisticas_das_24_horas (__main__.Integracao.test_geracao_idempotente_e_estatisticas_das_24_horas) ... ok
+test_media_cidade_usa_registros_e_nao_media_das_medias (__main__.Integracao.test_media_cidade_usa_registros_e_nao_media_das_medias) ... ok
+test_redis_guarda_ultima_hora_e_remove_resumo_obsoleto (__main__.Integracao.test_redis_guarda_ultima_hora_e_remove_resumo_obsoleto) ... ok
+test_validade_das_medicoes_e_limite_final_exclusivo (__main__.Integracao.test_validade_das_medicoes_e_limite_final_exclusivo) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.782s
+
+OK

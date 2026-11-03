@@ -1,0 +1,192 @@
+﻿
+==== 1/6 SERVIÇOS ====
+Verificando serviços locais (sem Docker)...
+[OK] MongoDB acessível em localhost — versão 8.0.34
+[OK] Redis acessível em localhost — versão 8.10.3 | ping=PONG
+
+==== 2/6 SENSORES E ÍNDICE ====
+[OK] Banco QualidadeAr: 6 sensores cadastrados.
+[OK] Índice: sensor_id_1_timestamp_-1 (sensor_id crescente, timestamp decrescente).
+  S001 → Chapecó/SC
+  S002 → Chapecó/SC
+  S003 → Xanxerê/SC
+  S004 → Xanxerê/SC
+  S005 → Concórdia/SC
+  S006 → Concórdia/SC
+
+==== 3/6 DADOS HISTÓRICOS ====
+[OK] 1728 medições geradas/atualizadas na janela.
+     2026-11-02T16:00:00Z → 2026-11-03T16:00:00Z (fim exclusivo)
+     Total histórico no MongoDB: 1728 documentos.
+     O mesmo sensor/horário não é duplicado ao reexecutar.
+
+==== 4/6 CONSULTA NO MONGODB ====
+Sensor S001: 12 medições em [2026-11-03T15:00:00Z, 2026-11-03T16:00:00Z)
+Exibindo 3 registro(s):
+  S001  2026-11-03T15:00:00Z  PM2.5=  9.77 µg/m³  PM10= 38.16 µg/m³  CO₂=480.82 ppm  T=18.33 °C  UR=73.59%
+  S001  2026-11-03T15:05:00Z  PM2.5=  9.76 µg/m³  PM10= 33.92 µg/m³  CO₂=521.90 ppm  T=19.45 °C  UR=67.24%
+  S001  2026-11-03T15:10:00Z  PM2.5=  9.53 µg/m³  PM10= 33.18 µg/m³  CO₂=464.95 ppm  T=19.30 °C  UR=77.46%
+... 9 registro(s) não exibidos. Aumente --limite.
+Cidade Chapecó: 24 medições em [2026-11-03T15:00:00Z, 2026-11-03T16:00:00Z)
+Exibindo 3 registro(s):
+  S002  2026-11-03T15:00:00Z  PM2.5= 15.93 µg/m³  PM10= 42.59 µg/m³  CO₂=489.16 ppm  T=18.96 °C  UR=68.72%
+  S001  2026-11-03T15:00:00Z  PM2.5=  9.77 µg/m³  PM10= 38.16 µg/m³  CO₂=480.82 ppm  T=18.33 °C  UR=73.59%
+  S002  2026-11-03T15:05:00Z  PM2.5= 14.48 µg/m³  PM10= 39.93 µg/m³  CO₂=493.60 ppm  T=19.47 °C  UR=65.59%
+... 21 registro(s) não exibidos. Aumente --limite.
+
+==== 5/6 AGREGAÇÃO E ATUALIZAÇÃO NO REDIS ====
+[OK] MongoDB: 144 resumos horários por sensor e 72 por cidade calculados.
+[OK] Redis: 6 Hash(es) de sensor + 3 Hash(es) de cidade atualizados.
+
+SENSOR S001 | 2026-11-03T15:00:00Z → 2026-11-03T16:00:00Z
+  Medições: 12  PM2.5 média/máx: 9.88/12.77 µg/m³  PM10 média/máx: 33.57/40.87 µg/m³
+  CO₂ médio: 484.05 ppm  Temperatura média: 18.07 °C  Umidade média: 74.33%
+
+SENSOR S002 | 2026-11-03T15:00:00Z → 2026-11-03T16:00:00Z
+  Medições: 12  PM2.5 média/máx: 12.91/15.93 µg/m³  PM10 média/máx: 37.89/42.59 µg/m³
+  CO₂ médio: 500.39 ppm  Temperatura média: 18.46 °C  Umidade média: 71.78%
+
+SENSOR S003 | 2026-11-03T15:00:00Z → 2026-11-03T16:00:00Z
+  Medições: 12  PM2.5 média/máx: 15.10/17.46 µg/m³  PM10 média/máx: 36.96/46.47 µg/m³
+  CO₂ médio: 523.40 ppm  Temperatura média: 18.64 °C  Umidade média: 73.73%
+
+SENSOR S004 | 2026-11-03T15:00:00Z → 2026-11-03T16:00:00Z
+  Medições: 12  PM2.5 média/máx: 17.38/20.25 µg/m³  PM10 média/máx: 41.70/49.33 µg/m³
+  CO₂ médio: 541.20 ppm  Temperatura média: 18.77 °C  Umidade média: 73.04%
+
+SENSOR S005 | 2026-11-03T15:00:00Z → 2026-11-03T16:00:00Z
+  Medições: 12  PM2.5 média/máx: 19.53/22.14 µg/m³  PM10 média/máx: 42.12/47.93 µg/m³
+  CO₂ médio: 565.70 ppm  Temperatura média: 19.62 °C  Umidade média: 75.32%
+
+SENSOR S006 | 2026-11-03T15:00:00Z → 2026-11-03T16:00:00Z
+  Medições: 12  PM2.5 média/máx: 21.94/24.60 µg/m³  PM10 média/máx: 45.07/51.07 µg/m³
+  CO₂ médio: 584.58 ppm  Temperatura média: 19.02 °C  Umidade média: 71.58%
+
+CIDADE Chapecó/SC | 2026-11-03T15:00:00Z → 2026-11-03T16:00:00Z
+  Medições: 24  PM2.5 média/máx: 11.39/15.93 µg/m³  PM10 média/máx: 35.73/42.59 µg/m³
+  CO₂ médio: 492.22 ppm  Temperatura média: 18.26 °C  Umidade média: 73.05%
+
+CIDADE Concórdia/SC | 2026-11-03T15:00:00Z → 2026-11-03T16:00:00Z
+  Medições: 24  PM2.5 média/máx: 20.74/24.60 µg/m³  PM10 média/máx: 43.60/51.07 µg/m³
+  CO₂ médio: 575.14 ppm  Temperatura média: 19.32 °C  Umidade média: 73.45%
+
+CIDADE Xanxerê/SC | 2026-11-03T15:00:00Z → 2026-11-03T16:00:00Z
+  Medições: 24  PM2.5 média/máx: 16.24/20.25 µg/m³  PM10 média/máx: 39.33/49.33 µg/m³
+  CO₂ médio: 532.30 ppm  Temperatura média: 18.71 °C  Umidade média: 73.39%
+
+==== 6/6 VALIDAÇÃO DO PROTÓTIPO ====
+MongoDB: 1728 medições nas últimas 24h completas.
+Agregações da hora 2026-11-03T15:00:00Z: 6 sensores, 3 cidades.
+[OK] Todos os requisitos quantitativos e Hashes Redis conferem com o MongoDB!
+[OK] 12 medições por sensor/hora; 24 por cidade/hora; 72 no total por hora.
+Redis: 9 Hashes armazenados:
+
+qualidadear:cidade:SC:chapeco
+  co2_media            = 492.22
+  fim_periodo          = 2026-11-03T16:00:00Z
+  inicio_periodo       = 2026-11-03T15:00:00Z
+  pm10_max             = 42.59
+  pm10_media           = 35.73
+  pm25_max             = 15.93
+  pm25_media           = 11.39
+  qt_medicoes          = 24
+  temperatura_media    = 18.26
+  umidade_media        = 73.05
+
+qualidadear:cidade:SC:concordia
+  co2_media            = 575.14
+  fim_periodo          = 2026-11-03T16:00:00Z
+  inicio_periodo       = 2026-11-03T15:00:00Z
+  pm10_max             = 51.07
+  pm10_media           = 43.60
+  pm25_max             = 24.60
+  pm25_media           = 20.74
+  qt_medicoes          = 24
+  temperatura_media    = 19.32
+  umidade_media        = 73.45
+
+qualidadear:cidade:SC:xanxere
+  co2_media            = 532.30
+  fim_periodo          = 2026-11-03T16:00:00Z
+  inicio_periodo       = 2026-11-03T15:00:00Z
+  pm10_max             = 49.33
+  pm10_media           = 39.33
+  pm25_max             = 20.25
+  pm25_media           = 16.24
+  qt_medicoes          = 24
+  temperatura_media    = 18.71
+  umidade_media        = 73.39
+
+qualidadear:sensor:S001
+  co2_media            = 484.05
+  fim_periodo          = 2026-11-03T16:00:00Z
+  inicio_periodo       = 2026-11-03T15:00:00Z
+  pm10_max             = 40.87
+  pm10_media           = 33.57
+  pm25_max             = 12.77
+  pm25_media           = 9.88
+  qt_medicoes          = 12
+  temperatura_media    = 18.07
+  umidade_media        = 74.33
+
+qualidadear:sensor:S002
+  co2_media            = 500.39
+  fim_periodo          = 2026-11-03T16:00:00Z
+  inicio_periodo       = 2026-11-03T15:00:00Z
+  pm10_max             = 42.59
+  pm10_media           = 37.89
+  pm25_max             = 15.93
+  pm25_media           = 12.91
+  qt_medicoes          = 12
+  temperatura_media    = 18.46
+  umidade_media        = 71.78
+
+qualidadear:sensor:S003
+  co2_media            = 523.40
+  fim_periodo          = 2026-11-03T16:00:00Z
+  inicio_periodo       = 2026-11-03T15:00:00Z
+  pm10_max             = 46.47
+  pm10_media           = 36.96
+  pm25_max             = 17.46
+  pm25_media           = 15.10
+  qt_medicoes          = 12
+  temperatura_media    = 18.64
+  umidade_media        = 73.73
+
+qualidadear:sensor:S004
+  co2_media            = 541.20
+  fim_periodo          = 2026-11-03T16:00:00Z
+  inicio_periodo       = 2026-11-03T15:00:00Z
+  pm10_max             = 49.33
+  pm10_media           = 41.70
+  pm25_max             = 20.25
+  pm25_media           = 17.38
+  qt_medicoes          = 12
+  temperatura_media    = 18.77
+  umidade_media        = 73.04
+
+qualidadear:sensor:S005
+  co2_media            = 565.70
+  fim_periodo          = 2026-11-03T16:00:00Z
+  inicio_periodo       = 2026-11-03T15:00:00Z
+  pm10_max             = 47.93
+  pm10_media           = 42.12
+  pm25_max             = 22.14
+  pm25_media           = 19.53
+  qt_medicoes          = 12
+  temperatura_media    = 19.62
+  umidade_media        = 75.32
+
+qualidadear:sensor:S006
+  co2_media            = 584.58
+  fim_periodo          = 2026-11-03T16:00:00Z
+  inicio_periodo       = 2026-11-03T15:00:00Z
+  pm10_max             = 51.07
+  pm10_media           = 45.07
+  pm25_max             = 24.60
+  pm25_media           = 21.94
+  qt_medicoes          = 12
+  temperatura_media    = 19.02
+  umidade_media        = 71.58
+
+[SUCESSO] Demonstração concluída!
