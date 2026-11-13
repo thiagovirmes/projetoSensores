@@ -67,27 +67,8 @@ Os intervalos incluem o início e excluem o fim. Datas precisam informar fuso ho
 | `requirements.txt` | Bibliotecas Python com versões fixadas |
 | `instalar.ps1` / `iniciar.ps1` | Instalação e inicialização local |
 | `APRESENTAR.cmd` / `apresentar.ps1` | Demonstração completa e registro da saída |
-| `RELATORIO_TECNICO.md` / `.pdf` / `.docx` | Relatório, referências e código-fonte em anexo nos formatos exportados |
-| `ROTEIRO_APRESENTACAO.md` | Sequência e pontos para explicar em classe |
 | `evidencias/` | Saídas reais da demonstração e testes |
 
 `dados/mongo` armazena o histórico local; `dados/redis` armazena o AOF do Redis; `logs/mongodb.log` contém o log do MongoDB. Os bancos ficam abertos após fechar a janela de apresentação. Essas pastas e os executáveis não fazem parte do pacote de entrega: são recriados pelos scripts.
 
 As conexões podem ser configuradas pelas variáveis de ambiente `MONGODB_URI` e `REDIS_URL`. Os scripts de inicialização provisionam apenas os endereços locais padrão; para servidores externos, inicie os serviços separadamente e use os comandos Python.
-
-## Relatório
-
-Preencha a identificação da equipe em `RELATORIO_TECNICO.md` e gere novamente os formatos de entrega, se necessário:
-
-```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements-relatorio.txt
-.\.venv\Scripts\python.exe exportar_relatorio.py
-```
-
-As dependências de exportação são opcionais; o protótipo usa apenas `requirements.txt`. Os formatos PDF e DOCX incluem o relatório e um apêndice com os três programas principais.
-
-Para atualizar o pacote após editar a identificação ou os documentos:
-
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\empacotar.ps1
-```
